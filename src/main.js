@@ -42,7 +42,7 @@ const main = (cfg) => {
 const normalServer = (req, res) => {
     console.log(`Postback endpoint contacted at ${new Date()}`)
 
-    if (typeOf(req.body) === 'Object' && typeOf (req.body.data === 'Array')) {
+    if (typeOf(req.body) === 'Object' && typeOf (req.body.data) === 'Array') {
         console.log(`    req.body.data is an Array with ${req.body.data.length} element(s)`)
     } else {
         console.log('    req.body.data is not an Array')
@@ -50,6 +50,7 @@ const normalServer = (req, res) => {
 
     if (req.body && req.body.metadata) {
         console.log(`    Metadata = ${JSON.stringify(req.body.metadata)}`)
+        //console.log(`    Metadata = ${req.body.metadata}`)
     } else {
         console.log('    No metadata found')
     }
@@ -71,7 +72,7 @@ const lazyServer = (req, res) => {
     if (requestCount > 2) {
         setTimeout(() => res.status(204).send("I've had enough now"), 500)
     } else {
-            setTimeout(() => res.status(201).send("Postback acknowledged"), 500)
+        setTimeout(() => res.status(201).send("Postback acknowledged"), 500)
     }
 }
 
