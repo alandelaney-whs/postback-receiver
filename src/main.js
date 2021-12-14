@@ -21,10 +21,15 @@ const main = (cfg) => {
     // Read config values with hard-coded defaults
     const port = cfg.port || 3000;
 
+    app.get("/postback", normalServer)
     app.post("/postback", normalServer)
+    app.get("/broken", brokenServer)
     app.post("/broken", brokenServer)
+    app.get("/lazy", lazyServer)
     app.post("/lazy", lazyServer)
+    app.get("/unresponsive", unresponsiveServer)
     app.post("/unresponsive", unresponsiveServer)
+    app.get("/rude", rudeServer)
     app.post("/rude", rudeServer)
 
     // Default route
@@ -78,13 +83,13 @@ const lazyServer = (req, res) => {
 
 // An unresponsive server keeps the connection open for 2 minutes, or until the client takes the hint
 const unresponsiveServer = (req, res) => {
-    console.log(`Postback endpoint contacted at ${new Date()}`)
+    console.log(`Unresponsive endpoint contacted at ${new Date()}`)
     setTimeout(() => res.status(201).send("Postback acknowledged"), 120000)
 }
 
 // A rude server hangs up without replying
 const rudeServer = (req, res) => {
-    console.log(`Postback endpoint contacted at ${new Date()}`)
+    console.log(`Rude endpoint contacted at ${new Date()}`)
     setTimeout(() => req.socket.destroy(), 500)
 }
 
