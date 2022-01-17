@@ -49,6 +49,7 @@ const normalServer = (req, res) => {
 
     if (typeOf(req.body) === 'Object' && typeOf (req.body.data) === 'Array') {
         console.log(`    req.body.data is an Array with ${req.body.data.length} element(s)`)
+        console.log(`    Metadata = ${JSON.stringify(req.body, null, 2)}`)
     } else {
         console.log('    req.body.data is not an Array')
     }
