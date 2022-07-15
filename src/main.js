@@ -23,6 +23,8 @@ const main = (cfg) => {
 
     app.get("/postback", normalServer)
     app.post("/postback", normalServer)
+    app.get("/queue", queueServer)
+    app.post("/queue", queueServer)
     app.get("/broken", brokenServer)
     app.post("/broken", brokenServer)
     app.get("/lazy", lazyServer)
@@ -62,6 +64,13 @@ const normalServer = (req, res) => {
     }
 
     setTimeout(() => res.status(201).send("Postback acknowledged"), 500)
+}
+
+const queueServer = (req, res) => {
+    console.log(`Queue endpoint contacted at ${new Date()}`)
+    console.log(JSON.stringify(req.body, null, 2))
+
+    setTimeout(() => res.status(200).send("Postback acknowledged"), 500)
 }
 
 // A broken server responds with a 500 error code
