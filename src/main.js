@@ -1,7 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { readFile } from 'fs/promises'
-// import { getRandomInt } from './utils/utils.js'
 import { numberDetect as typeOf } from 'number-detect'
 
 let requestCount = 0
@@ -93,9 +92,12 @@ const rudeServer = (req, res) => {
 
 const allRoutes = (req, res) => {
   console.log(`General endpoint contacted at ${new Date()}`)
-  console.log(JSON.stringify(req.body, null, 2))
+  console.log(`URL: ${req.url}`)
+  console.log(`Method: ${req.method}`)
+    console.log(`Body: ${JSON.stringify(req.body, null, 2)}\n\n`)
 
-  setTimeout(() => res.status(200).send('Postback acknowledged'), 500)
+
+  setTimeout(() => res.status(200).send('Postback acknowledged\n'), 500)
 }
 
 main(config)
