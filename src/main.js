@@ -94,8 +94,7 @@ const allRoutes = (req, res) => {
   console.log(`General endpoint contacted at ${new Date()}`)
   console.log(`URL: ${req.url}`)
   console.log(`Method: ${req.method}`)
-    console.log(`Body: ${JSON.stringify(req.body, null, 2)}\n\n`)
-
+  console.log(`Body: ${JSON.stringify(req.body, null, 2)}\n\n`)
 
   setTimeout(() => res.status(200).send('Postback acknowledged\n'), 500)
 }
